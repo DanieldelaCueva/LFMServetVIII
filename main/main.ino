@@ -37,6 +37,19 @@ void setup() {
     return;
   }
   Serial.println(F("SD card started successfully")); 
+
+  // Data format prompt creation, to write in an understandable way for the visualization script
+  logFile = SD.open("datalog.txt", FILE_WRITE);
+  if(logFile){
+    logFile.println("Time (ms): ");
+    logFile.println("Temperature (ºC): ");
+    logFile.println("Humidity (%): ");
+    logFile.println("Pressure (hPa): ");
+    logFile.close();
+  } else {
+    Serial.println("Error opening the file");
+  }
+
 }
 
 void loop() {
@@ -56,14 +69,10 @@ void loop() {
   logFile = SD.open("datalog.txt", FILE_WRITE);
 
   // writes sensors readings to the SD card if the file is successfully opened, prints error otherwise
-  if (logFile) { 
-    logFile.print("Time (ms): ");
+  if (logFile) {
     logFile.println(millis());
-    logFile.print("Temperature (ºC): ");
-    logFile.println(t);
-    logFile.print("Humidity (%): ");
+    logFile.println(t);    
     logFile.println(h);
-    logFile.print("Pressure (hPa): ");
     logFile.println(pressure); 
     logFile.close(); 
   } else {

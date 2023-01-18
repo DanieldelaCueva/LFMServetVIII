@@ -45,6 +45,7 @@ void setup() {
     logFile.println("Temperature (ºC): ");
     logFile.println("Humidity (%): ");
     logFile.println("Pressure (hPa): ");
+    logFile.close();
   } else {
     Serial.println("Error opening the file");
   }

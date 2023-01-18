@@ -24,6 +24,8 @@ File logFile;
 
 DHT dht(DHTPIN, DHTTYPE);
 
+float tension, pressure;  // pressure sensor variables
+
 void setup() {
   Serial.begin(9600);
 
@@ -45,12 +47,16 @@ void loop() {
   if (isnan(t) || isnan(h)){
       Serial.print("Error reading DHT22");
   }
-  
-   // opens or creates file datalog.txt to write it
-   logFile = SD.open("datalog.txt", FILE_WRITE);
 
-   // writes time from script's start in ms if the file is successfully opened, prints error otherwise
-   if (logFile) { 
+  // pressure sensor reading and signal conversion
+  tension = analogRead(A0) * 5.0 / 1023.0; 
+  pressure = tension * 760.0 + 500.0;
+  
+  // opens or creates file datalog.txt to write it
+  logFile = SD.open("datalog.txt", FILE_WRITE);
+
+  // writes time from script's start in ms if the file is successfully opened, prints error otherwise
+  if (logFile) { 
     logFile.print("Time (ms): ");
     logFile.println(millis());
     logFile.print("Temperature (ºC): ");

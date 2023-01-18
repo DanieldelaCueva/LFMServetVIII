@@ -55,7 +55,7 @@ void loop() {
   // opens or creates file datalog.txt to write it
   logFile = SD.open("datalog.txt", FILE_WRITE);
 
-  // writes time from script's start in ms if the file is successfully opened, prints error otherwise
+  // writes sensors readings to the SD card if the file is successfully opened, prints error otherwise
   if (logFile) { 
     logFile.print("Time (ms): ");
     logFile.println(millis());
@@ -63,9 +63,22 @@ void loop() {
     logFile.println(t);
     logFile.print("Humidity (%): ");
     logFile.println(h);
-  
+    logFile.print("Pressure (hPa): ");
+    logFile.println(pressure); 
+    logFile.close(); 
   } else {
     Serial.println("Error opening the file");
   }
-  delay(500);
+
+  // writes sensors readings to the serial monitor
+  Serial.print("Time (ms): ");
+  Serial.println(millis());
+  Serial.print("Temperature (ºC): ");
+  Serial.println(t);
+  Serial.print("Humidity (%): ");
+  Serial.println(h);
+  Serial.print("Pressure (hPa): ");
+  Serial.println(pressure);
+
+  delay(2000);
 }

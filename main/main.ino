@@ -18,6 +18,8 @@ LYCÉE MOLIÈRE ZARAGOZA
   #define DHTTYPE DHT22
 
 // Used pins declaration
+const int UV_CONTROL_ANALOG_PIN = A1;
+const int UV_EXP_ANALOG_PIN = A2;
 
 // Global variables
 File logFile;
@@ -45,6 +47,8 @@ void setup() {
     logFile.println("Temperature (ºC): ");
     logFile.println("Humidity (%): ");
     logFile.println("Pressure (hPa): ");
+    logFile.println("UV control index: ");
+    logFile.println("UV experiment index: ");
     logFile.close();
   } else {
     Serial.println("Error opening the file");
@@ -64,6 +68,24 @@ void loop() {
   // pressure sensor reading and signal conversion
   tension = analogRead(A0) * 5.0 / 1023.0; 
   pressure = tension * 760.0 + 500.0;
+
+  // UV control measuing
+  float control_sensor_output = analogRead(UV_CONTROL_ANALOG_PIN);
+  float UV_control_value;
+  if (round(control_sensor_output / 100) - 1 >= 0){
+    UV_value = round(control_sensor_output / 100) - 1;
+  } else {
+    UV_value = round(control_sensor_output / 100);
+  }
+
+  // UV experiment measuing
+  float exp_sensor_output = analogRead(UV_EXP_ANALOG_PIN);
+  float UV_exp_value;
+  if (round(control_exp_output / 100) - 1 >= 0){
+   UV_exp_value = round(control_exp_output / 100) - 1;
+  } else {
+   UV_exp_value = round(control_exp_output / 100);
+  }
   
   // opens or creates file datalog.txt to write it
   logFile = SD.open("datalog.txt", FILE_WRITE);
@@ -74,6 +96,8 @@ void loop() {
     logFile.println(t);    
     logFile.println(h);
     logFile.println(pressure); 
+    logFile.println(UV_control_value);
+    logFile.println(UV_exp_value);
     logFile.close(); 
   } else {
     Serial.println("Error opening the file");
@@ -88,6 +112,10 @@ void loop() {
   Serial.println(h);
   Serial.print("Pressure (hPa): ");
   Serial.println(pressure);
+  Serial.print("UV control index: ");
+  Serial.println(UV_control_value);
+  Serial.print("UV exp index: ");
+  Serial.println(UV_exp_value);
 
   delay(2000);
 }

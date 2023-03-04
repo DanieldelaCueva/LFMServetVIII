@@ -21,6 +21,8 @@ LYCÉE MOLIÈRE ZARAGOZA
 const int UV_CONTROL_ANALOG_PIN = A1;
 const int UV_EXP_ANALOG_PIN = A2;
 
+const int BLUE_LED_PIN = 8; // heartbeat pin
+
 // Global variables
 File logFile;
 
@@ -30,6 +32,9 @@ float tension, pressure;  // pressure sensor variables
 
 void setup() {
   Serial.begin(9600);
+
+  // Heartbeat pin init
+  pinMode(BLUE_LED_PIN, OUTPUT);
 
   // SD card initialization
   Serial.print(F("Starting SD card"));
@@ -92,6 +97,7 @@ void loop() {
 
   // writes sensors readings to the SD card if the file is successfully opened, prints error otherwise
   if (logFile) {
+    digitalWrite(BLUE_LED_PIN, LOW);
     logFile.println(millis());
     logFile.println(t);    
     logFile.println(h);
@@ -101,7 +107,17 @@ void loop() {
     logFile.close(); 
   } else {
     Serial.println("Error opening the file");
+
+    // Error warning - led blinking
+    for (int i=0; i<10; i++){
+      digitalWrite(BLUE_LED_PIN, LOW);
+      delay(200);
+      digitalWrite(BLUE_LED_PIN, HIGH);
+      delay(200);
+      }
   }
+
+  digitalWrite(BLUE_LED_PIN, HIGH);
 
   // writes sensors readings to the serial monitor
   Serial.print("Time (ms): ");

@@ -107,6 +107,14 @@ void loop() {
     logFile.close(); 
   } else {
     Serial.println("Error opening the file");
+
+    // Error warning - led blinking
+    for (int i=0; i<10; i++){
+      digitalWrite(BLUE_LED_PIN, LOW);
+      delay(200);
+      digitalWrite(BLUE_LED_PIN, HIGH);
+      delay(200);
+      }
   }
 
   digitalWrite(BLUE_LED_PIN, HIGH);

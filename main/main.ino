@@ -20,13 +20,16 @@ LYCÉE MOLIÈRE ZARAGOZA
 // Used pins declaration
 const int UV_CONTROL_ANALOG_PIN = A1;
 const int UV_EXP_ANALOG_PIN = A2;
+const int CONTROL_BATTERY_READ_PIN = A3;
+const int EXP_BATTERY_READ_PIN = A4;
 
 const int BLUE_LED_PIN = 8; // heartbeat pin
 
 // Global variables
 File logFile;
-
 DHT dht(DHTPIN, DHTTYPE);
+float control_battery_level;
+float exp_battery_level;
 
 float tension, pressure;  // pressure sensor variables
 
@@ -52,8 +55,10 @@ void setup() {
     logFile.println("Temperature (ºC): ");
     logFile.println("Humidity (%): ");
     logFile.println("Pressure (hPa): ");
-    logFile.println("UV control index: ");
-    logFile.println("UV experiment index: ");
+    logFile.println("UV control index (%): ");
+    logFile.println("UV experiment index (%): ");
+    logFile.print("Control battery level (V): ");
+    logFile.print("Experimental battery level (V): ");
     logFile.close();
   } else {
     Serial.println("Error opening the file");
@@ -69,6 +74,10 @@ void loop() {
   if (isnan(t) || isnan(h)){
       Serial.print("Error reading DHT22");
   }
+
+  // battery level readings
+  control_battery_level = analogRead(CONTROL_BATTERY_READ_PIN);
+  exp_battery_level = analogRead(EXP_BATTERY_READ_PIN);
 
   // pressure sensor reading and signal conversion
   tension = analogRead(A0) * 5.0 / 1023.0; 
@@ -104,6 +113,8 @@ void loop() {
     logFile.println(pressure); 
     logFile.println(UV_control_value);
     logFile.println(UV_exp_value);
+    logFile.print(control_battery_level);
+    logFile.print(exp_battery_level);
     logFile.close(); 
   } else {
     Serial.println("Error opening the file");
@@ -132,6 +143,10 @@ void loop() {
   Serial.println(UV_control_value);
   Serial.print("UV exp index: ");
   Serial.println(UV_exp_value);
+  Serial.print("Control battery level (V): ");
+  Serial.print(control_battery_level);
+  Serial.print("Experimental battery level (V): ");
+  Serial.print(exp_battery_level);
 
   delay(2000);
 }

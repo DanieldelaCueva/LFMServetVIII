@@ -115,7 +115,8 @@ void loop() {
     logFile.println(UV_exp_value);
     logFile.print(control_battery_level);
     logFile.print(exp_battery_level);
-    logFile.close(); 
+    logFile.close();
+    digitalWrite(BLUE_LED_PIN, HIGH);
   } else {
     Serial.println("Error opening the file");
 
@@ -125,10 +126,11 @@ void loop() {
       delay(200);
       digitalWrite(BLUE_LED_PIN, HIGH);
       delay(200);
-      }
-  }
+    }
 
-  digitalWrite(BLUE_LED_PIN, HIGH);
+    // SD restart - in case the error is fixed 
+    SD.begin(10);
+  }
 
   // writes sensors readings to the serial monitor
   Serial.print("Time (ms): ");

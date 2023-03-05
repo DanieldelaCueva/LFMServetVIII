@@ -126,7 +126,10 @@ void loop() {
       delay(200);
       digitalWrite(BLUE_LED_PIN, HIGH);
       delay(200);
-      }
+    }
+
+    // SD restart - in case the error is fixed 
+    SD.begin(10);
   }
 
   // writes sensors readings to the serial monitor

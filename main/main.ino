@@ -51,14 +51,14 @@ void setup() {
   // Data format prompt creation, to write in an understandable way for the visualization script
   logFile = SD.open("datalog.txt", FILE_WRITE);
   if(logFile){
-    logFile.println("Time (ms): ");
-    logFile.println("Temperature (ºC): ");
-    logFile.println("Humidity (%): ");
-    logFile.println("Pressure (hPa): ");
-    logFile.println("UV control index (%): ");
-    logFile.println("UV experiment index (%): ");
-    logFile.print("Control battery level (V): ");
-    logFile.print("Experimental battery level (V): ");
+    logFile.print("Time (ms); ");
+    logFile.print("Temperature (ºC); ");
+    logFile.print("Humidity (%); ");
+    logFile.print("Pressure (hPa); ");
+    logFile.print("UV control index (%); ");
+    logFile.print("UV experiment index (%); ");
+    logFile.print("Control battery level (V); ");
+    logFile.println("Experimental battery level (V); ");
     logFile.close();
   } else {
     Serial.println("Error opening the file");
@@ -107,14 +107,14 @@ void loop() {
   // writes sensors readings to the SD card if the file is successfully opened, prints error otherwise
   if (logFile) {
     digitalWrite(BLUE_LED_PIN, LOW);
-    logFile.println(millis());
-    logFile.println(t);    
-    logFile.println(h);
-    logFile.println(pressure); 
-    logFile.println(UV_control_value);
-    logFile.println(UV_exp_value);
-    logFile.print(control_battery_level);
-    logFile.print(exp_battery_level);
+    logFile.print(millis() + "; ");
+    logFile.print(t + "; ");    
+    logFile.print(h + "; ");
+    logFile.print(pressure + "; "); 
+    logFile.print(UV_control_value + "; ");
+    logFile.print(UV_exp_value + "; ");
+    logFile.print(control_battery_level + "; ");
+    logFile.println(exp_battery_level + "; ");
     logFile.close();
     digitalWrite(BLUE_LED_PIN, HIGH);
   } else {

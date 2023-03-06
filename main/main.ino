@@ -87,18 +87,18 @@ void loop() {
   float control_sensor_output = analogRead(UV_CONTROL_ANALOG_PIN);
   float UV_control_value;
   if (round(control_sensor_output / 100) - 1 >= 0){
-    UV_value = round(control_sensor_output / 100) - 1;
+    UV_control_value = round(control_sensor_output / 100) - 1;
   } else {
-    UV_value = round(control_sensor_output / 100);
+    UV_control_value = round(control_sensor_output / 100);
   }
 
   // UV experiment measuing
   float exp_sensor_output = analogRead(UV_EXP_ANALOG_PIN);
   float UV_exp_value;
-  if (round(control_exp_output / 100) - 1 >= 0){
-   UV_exp_value = round(control_exp_output / 100) - 1;
+  if (round(exp_sensor_output / 100) - 1 >= 0){
+   UV_exp_value = round(exp_sensor_output / 100) - 1;
   } else {
-   UV_exp_value = round(control_exp_output / 100);
+   UV_exp_value = round(exp_sensor_output / 100);
   }
   
   // opens or creates file datalog.txt to write it

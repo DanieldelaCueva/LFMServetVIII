@@ -107,14 +107,14 @@ void loop() {
   // writes sensors readings to the SD card if the file is successfully opened, prints error otherwise
   if (logFile) {
     digitalWrite(BLUE_LED_PIN, LOW);
-    logFile.println(millis());
-    logFile.println(t);    
-    logFile.println(h);
-    logFile.println(pressure); 
-    logFile.println(UV_control_value);
-    logFile.println(UV_exp_value);
-    logFile.print(control_battery_level);
-    logFile.print(exp_battery_level);
+    logFile.print(millis() + "; ");
+    logFile.print(t + "; ");    
+    logFile.print(h + "; ");
+    logFile.print(pressure + "; "); 
+    logFile.print(UV_control_value + "; ");
+    logFile.print(UV_exp_value + "; ");
+    logFile.print(control_battery_level + "; ");
+    logFile.println(exp_battery_level + "; ");
     logFile.close();
     digitalWrite(BLUE_LED_PIN, HIGH);
   } else {

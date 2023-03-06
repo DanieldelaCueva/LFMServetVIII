@@ -51,14 +51,14 @@ void setup() {
   // Data format prompt creation, to write in an understandable way for the visualization script
   logFile = SD.open("datalog.txt", FILE_WRITE);
   if(logFile){
-    logFile.println("Time (ms): ");
-    logFile.println("Temperature (ºC): ");
-    logFile.println("Humidity (%): ");
-    logFile.println("Pressure (hPa): ");
-    logFile.println("UV control index (%): ");
-    logFile.println("UV experiment index (%): ");
-    logFile.print("Control battery level (V): ");
-    logFile.print("Experimental battery level (V): ");
+    logFile.print("Time (ms); ");
+    logFile.print("Temperature (ºC); ");
+    logFile.print("Humidity (%); ");
+    logFile.print("Pressure (hPa); ");
+    logFile.print("UV control index (%); ");
+    logFile.print("UV experiment index (%); ");
+    logFile.print("Control battery level (V); ");
+    logFile.println("Experimental battery level (V); ");
     logFile.close();
   } else {
     Serial.println("Error opening the file");

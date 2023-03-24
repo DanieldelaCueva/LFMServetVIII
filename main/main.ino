@@ -20,8 +20,7 @@ LYCÉE MOLIÈRE ZARAGOZA
 // Used pins declaration
 const int UV_CONTROL_ANALOG_PIN = A1;
 const int UV_EXP_ANALOG_PIN = A2;
-const int CONTROL_BATTERY_READ_PIN = A3;
-const int EXP_BATTERY_READ_PIN = A4;
+const int EXP_BATTERY_READ_PIN = A3;
 
 const int BLUE_LED_PIN = 8; // heartbeat pin
 
@@ -57,7 +56,6 @@ void setup() {
     logFile.print("Pressure (hPa); ");
     logFile.print("UV control index (%); ");
     logFile.print("UV experiment index (%); ");
-    logFile.print("Control battery level (V); ");
     logFile.println("Experimental battery level (V); ");
     logFile.close();
   } else {
@@ -76,7 +74,6 @@ void loop() {
   }
 
   // battery level readings
-  control_battery_level = analogRead(CONTROL_BATTERY_READ_PIN);
   exp_battery_level = analogRead(EXP_BATTERY_READ_PIN);
 
   // pressure sensor reading and signal conversion
@@ -113,7 +110,6 @@ void loop() {
     logFile.print(String(pressure) + "; "); 
     logFile.print(String(UV_control_value) + "; ");
     logFile.print(String(UV_exp_value) + "; ");
-    logFile.print(String(control_battery_level) + "; ");
     logFile.println(String(exp_battery_level) + "; ");
     logFile.close();
     digitalWrite(BLUE_LED_PIN, HIGH);
@@ -145,8 +141,6 @@ void loop() {
   Serial.println(UV_control_value);
   Serial.print("UV exp index: ");
   Serial.println(UV_exp_value);
-  Serial.print("Control battery level (V): ");
-  Serial.print(control_battery_level);
   Serial.print("Experimental battery level (V): ");
   Serial.print(exp_battery_level);
 

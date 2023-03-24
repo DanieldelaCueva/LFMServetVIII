@@ -1,18 +1,17 @@
 import matplotlib.pyplot as plt
 
 class VisualizationSaver:
-    def __init__(self, time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp):
+    def __init__(self, time, temp, humidity, pressure, UV_control, UV_exp, batt_exp):
         self.time = time
         self.temp = temp
         self.humidity = humidity
         self.pressure = pressure
         self.UV_control = UV_control
         self.UV_exp = UV_exp
-        self.batt_control = batt_control
         self.batt_exp = batt_exp
         
     def save_all_data(self):
-        fig, axes = plt.subplots(nrows=4, ncols=2, figsize=(12, 16))
+        fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(12, 16))
         axes[0, 0].plot(self.time, self.temp)
         axes[0, 0].set_xlabel('Time')
         axes[0, 0].set_ylabel('Temperature (C)')
@@ -33,15 +32,11 @@ class VisualizationSaver:
         axes[2, 0].set_xlabel('Time')
         axes[2, 0].set_ylabel('UV Exp')
         axes[2, 0].set_title('UV Exp over Time')
-        axes[2, 1].plot(self.time, self.batt_control)
+        axes[2, 1].plot(self.time, self.batt_exp)
         axes[2, 1].set_xlabel('Time')
-        axes[2, 1].set_ylabel('Battery Control')
-        axes[2, 1].set_title('Battery Control over Time')
-        axes[3, 0].plot(self.time, self.batt_exp)
-        axes[3, 0].set_xlabel('Time')
-        axes[3, 0].set_ylabel('Battery Exp')
-        axes[3, 0].set_title('Battery Exp over Time')
-        plt.tight_layout()
+        axes[2, 1].set_ylabel('Battery Exp')
+        axes[2, 1].set_title('Battery Exp over Time')
+        plt.tight_layout(h_pad=4, w_pad=2)
         plt.savefig('all_data.jpg')
 
     def save_separately(self, file_name_prefix):
@@ -79,15 +74,6 @@ class VisualizationSaver:
         ax.set_ylabel('UV Control')
         ax.set_title('UV Control over Time')
         fig.savefig(file_name_prefix + '_UV_control.jpg')
-        plt.close(fig)
-        
-        # Plot and save UV exp over time
-        fig, ax = plt.subplots()
-        ax.plot(self.time, self.UV_exp)
-        ax.set_xlabel('Time')
-        ax.set_ylabel('UV Exp')
-        ax.set_title('UV Exp over Time')
-        fig.savefig(file_name_prefix + '_UV_exp.jpg')
         plt.close(fig)
         
         # Plot and save batt_control over time

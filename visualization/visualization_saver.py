@@ -1,13 +1,14 @@
 import matplotlib.pyplot as plt
 
 class VisualizationSaver:
-    def __init__(self, time, temp, humidity, pressure, UV_control, UV_exp, batt_exp):
+    def __init__(self, time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp):
         self.time = time
         self.temp = temp
         self.humidity = humidity
         self.pressure = pressure
         self.UV_control = UV_control
         self.UV_exp = UV_exp
+        self.batt_control = batt_control
         self.batt_exp = batt_exp
         
     def save_all_data(self):
@@ -74,6 +75,15 @@ class VisualizationSaver:
         ax.set_ylabel('UV Control')
         ax.set_title('UV Control over Time')
         fig.savefig(file_name_prefix + '_UV_control.jpg')
+        plt.close(fig)
+        
+        # Plot and save UV exp over time
+        fig, ax = plt.subplots()
+        ax.plot(self.time, self.UV_exp)
+        ax.set_xlabel('Time')
+        ax.set_ylabel('UV Exp')
+        ax.set_title('UV Exp over Time')
+        fig.savefig(file_name_prefix + '_UV_exp.jpg')
         plt.close(fig)
         
         # Plot and save batt_control over time

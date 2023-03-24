@@ -1,0 +1,17 @@
+
+
+
+time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+temp = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+humidity = [50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+pressure = [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009]
+UV_control = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+UV_exp = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+batt_control = [5, 4.9, 4.8, 4.7, 4.6, 4.5, 4.4, 4.3, 4.2, 4.1]
+batt_exp = [5, 4.9, 4.8, 4.7, 4.6, 4.5, 4.4, 4.3, 4.2, 4.1]
+
+# Create an instance of SensorDataVisualizer
+visualizer = SensorDataVisualizer(time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp)
+
+# Plot all the sensor data
+visualizer.plot_all_data()

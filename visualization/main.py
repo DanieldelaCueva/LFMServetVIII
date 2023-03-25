@@ -1,3 +1,6 @@
+from sensor_data_visualizer import SensorDataVisualizer
+from visualization_saver import VisualizationSaver
+
 # lists which will contain data
 time = []
 temp = []
@@ -33,11 +36,15 @@ with open("DATALOG.TXT") as f:
 for i in range(len(time)):
     time[i] = time[i]/60000
 
-print(time)
-print(temp)
-print(humidity)
-print(pressure)
-print(UV_control)
-print(UV_exp)
-print(batt_control)
-print(batt_exp)
+
+# save different data layers and sets
+saver = VisualizationSaver(time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp)
+saver.save_all_data()
+saver.save_all_separately()
+saver.save_ambient_parameters()
+saver.save_batt_experiment()
+saver.save_UV_expermient()
+
+# plot data
+visualizer = SensorDataVisualizer(time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp)
+visualizer.plot_all_data()

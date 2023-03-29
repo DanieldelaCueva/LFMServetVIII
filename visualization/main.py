@@ -28,8 +28,7 @@ with open("DATALOG.TXT") as f:
         pressure.append(float(line.split(";")[3].replace(" ", "")))
         UV_control.append(float(line.split(";")[4].replace(" ", "")))
         UV_exp.append(float(line.split(";")[5].replace(" ", "")))
-        batt_control.append(float(line.split(";")[6].replace(" ", "")))
-        batt_exp.append(float(line.split(";")[7].replace(" ", "")))
+        batt_exp.append(float(line.split(";")[6].replace(" ", "")))
 
 
 # time conversion in minutes

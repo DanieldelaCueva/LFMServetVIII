@@ -20,7 +20,7 @@ LYCÉE MOLIÈRE ZARAGOZA
 // Used pins declaration
 const int UV_CONTROL_ANALOG_PIN = A1;
 const int UV_EXP_ANALOG_PIN = A2;
-const int EXP_BATTERY_READ_PIN = A3;
+const int EXP_BATTERY_READ_PIN = A5;
 
 const int BLUE_LED_PIN = 8; // heartbeat pin
 

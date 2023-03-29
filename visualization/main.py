@@ -28,14 +28,14 @@ with open("DATALOG.TXT") as f:
         pressure.append(float(line.split(";")[3].replace(" ", "")))
         UV_control.append(float(line.split(";")[4].replace(" ", "")))
         UV_exp.append(float(line.split(";")[5].replace(" ", "")))
-        batt_control.append(float(line.split(";")[6].replace(" ", "")))
-        batt_exp.append(float(line.split(";")[7].replace(" ", "")))
+        batt_exp.append(float(line.split(";")[6].replace(" ", "")))
 
 
 # time conversion in minutes
 for i in range(len(time)):
     time[i] = time[i]/60000
 
+batt_control = [0 for i in range(len(time))]
 
 # save different data layers and sets
 saver = VisualizationSaver(time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp)

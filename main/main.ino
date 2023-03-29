@@ -142,7 +142,7 @@ void loop() {
   Serial.print("UV exp index: ");
   Serial.println(UV_exp_value);
   Serial.print("Experimental battery level (V): ");
-  Serial.print(exp_battery_level);
+  Serial.println(exp_battery_level);
 
   delay(2000);
 }

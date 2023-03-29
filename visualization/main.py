@@ -36,6 +36,7 @@ with open("DATALOG.TXT") as f:
 for i in range(len(time)):
     time[i] = time[i]/60000
 
+batt_control = [0 for i in range(len(time))]
 
 # save different data layers and sets
 saver = VisualizationSaver(time, temp, humidity, pressure, UV_control, UV_exp, batt_control, batt_exp)

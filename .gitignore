@@ -1,0 +1,5 @@
+# Ignore python cache files
+visualization/__pychache__/
+
+# Ignore jpg figures
+visualization/figures/

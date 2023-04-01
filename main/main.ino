@@ -112,15 +112,16 @@ void loop() {
     logFile.print(String(UV_exp_value) + "; ");
     logFile.println(String(exp_battery_level) + "; ");
     logFile.close();
+    delay(1000);
     digitalWrite(BLUE_LED_PIN, HIGH);
   } else {
     Serial.println("Error opening the file");
 
     // Error warning - led blinking
     for (int i=0; i<10; i++){
-      digitalWrite(BLUE_LED_PIN, LOW);
-      delay(200);
       digitalWrite(BLUE_LED_PIN, HIGH);
+      delay(200);
+      digitalWrite(BLUE_LED_PIN, LOW);
       delay(200);
     }
 
@@ -144,5 +145,5 @@ void loop() {
   Serial.print("Experimental battery level (V): ");
   Serial.println(exp_battery_level);
 
-  delay(2000);
+  delay(1000);
 }
